@@ -1,0 +1,5 @@
+body div.alert{
+    bottom: 5px;
+    position: fixed;
+    right: 5px;
+}
