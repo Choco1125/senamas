@@ -14,13 +14,13 @@
             <li class="nav-item <?php echo ($active == '')?'active':'' ?>">
                 <a class="nav-link" href="#">Pricing</a>
             </li> -->
-            <li class="nav-item dropdown <?php echo ($active == 'especialidad')?'active':'' ?>">
-                <a class="nav-link dropdown-toggle" href="#" id="desple-especialidad" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Especialidad
+            <li class="nav-item dropdown <?php echo ($active == 'cita')?'active':'' ?>">
+                <a class="nav-link dropdown-toggle" href="#" id="desple-citas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Citas
                 </a>
-                <div class="dropdown-menu" aria-labelledby="desple-especialidad">
-                    <a class="dropdown-item" href="index.php?controller=especialidad&action=crear">Crear</a>
-                    <a class="dropdown-item" href="index.php?controller=especialidad">Ver</a>
+                <div class="dropdown-menu" aria-labelledby="desple-citas">
+                    <a class="dropdown-item" href="index.php?controller=cita&action=crear">Crear</a>
+                    <a class="dropdown-item" href="index.php?controller=cita">Ver</a>
                 </div>
             </li>
             <li class="nav-item dropdown <?php echo ($active == 'doctor')?'active':'' ?>">
@@ -30,6 +30,15 @@
                 <div class="dropdown-menu" aria-labelledby="desple-doctores">
                     <a class="dropdown-item" href="index.php?controller=doctor&action=crear">Crear</a>
                     <a class="dropdown-item" href="index.php?controller=doctor">Ver</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown <?php echo ($active == 'especialidad')?'active':'' ?>">
+                <a class="nav-link dropdown-toggle" href="#" id="desple-especialidad" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Especialidad
+                </a>
+                <div class="dropdown-menu" aria-labelledby="desple-especialidad">
+                    <a class="dropdown-item" href="index.php?controller=especialidad&action=crear">Crear</a>
+                    <a class="dropdown-item" href="index.php?controller=especialidad">Ver</a>
                 </div>
             </li>
             <li class="nav-item dropdown <?php echo ($active == 'paciente')?'active':'' ?>">

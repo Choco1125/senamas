@@ -15,6 +15,9 @@
         case 'especialidad':
             $controlador = 'especialidad';
             break;
+        case 'cita':
+            $controlador = 'cita';
+            break;
         default:
             $controlador = CONTROLLADOR_DEFECTO;
             break;

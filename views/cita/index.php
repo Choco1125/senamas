@@ -1,39 +1,46 @@
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="mt-2" >Doctores</h1>
+        <h1 class="mt-2" >Citas</h1>
     </div>
     <div class="row justify-content-end">
-        <a href="index.php?controller=doctor&action=crear" class="btn btn-outline-primary">
+        <a href="index.php?controller=cita&action=crear" class="btn btn-outline-primary">
             crear
         </a>
     </div>
     <div class="row justify-content-center">
         <table class="table table-bordered mt-3 mb-2 text-center">
             <thead>
-                <th scope="col">Documento</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Email</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Lugar</th>
+                <th scope="col">Consultorio</th>
+                <th scope="col">Doctor</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Paciente</th>
                 <th scope="col">Opciones</th>
             </thead>
             <tbody id="tbody">
                 <?php
-                    if(isset($medicos)){
-                        foreach ($medicos as $medico) {
+                    if(isset($citas)){
+                        foreach ($citas as $cita) {
                 ?>
-                    <tr id="<?php echo $medico->codigo; ?>">
-                        <td><?php echo $medico->documento; ?></td>
-                        <td><?php echo $medico->nombre; ?></td>
-                        <td><?php echo $medico->email; ?></td>
-                       
+                    <tr id="<?php echo $cita->codCita; ?>">
+                        <td><?php echo $cita->codCita; ?></td>
+                        <td><?php echo $cita->lugar; ?></td>
+                        <td><?php echo $cita->consultorio; ?></td>
+                        <td><?php echo $cita->doctor; ?></td>
+                        <td><?php echo $cita->fecha; ?></td>
+                        <td><?php echo $cita->hora; ?></td>
+                        <td><?php echo $cita->paciente; ?></td>
                         <th>
                             <a class="btn btn-outline-primary btn-sm col-12 col-md-3" 
-                                href="<?php echo URL?>?controller=doctor&action=editar&medico=<?php echo $medico->codigo?>" >
+                                href="<?php echo URL?>?controller=cita&action=editar&cita=<?php echo $cita->codCita?>" >
                                 <i class="fas fa-edit"></i>
                             </a>
                             &nbsp;
                             <button 
                                 class="btn btn-outline-danger btn-sm col-12 col-md-3" 
-                                onclick="eliminar(<?php echo $medico->codigo; ?>)"
+                                onclick="eliminar(<?php echo $cita->codCita; ?>)"
                                 data-toggle="modal" data-target="#eliminar"
                             >
                                 <i class="fas fa-trash"></i>
@@ -57,7 +64,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="eliminarLabel">¿Deseas eliminar el doctor?</h5>
+                        <h5 class="modal-title" id="eliminarLabel">¿Deseas la cita?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -71,4 +78,4 @@
         </div>
     </div>
 </div>
-<script src="js/medico/index.js"></script>
+<script src="js/cita/index.js"></script>
