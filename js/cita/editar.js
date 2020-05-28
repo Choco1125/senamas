@@ -1,6 +1,8 @@
 let btnGuardar = document.getElementById('guardar');
 
 btnGuardar.addEventListener('click',async ()=>{
+    let id = location.search.split('=')[location.search.split('=').length-1];
+
     //Inputs-----------------------------------------------------------------
     let codigo = document.getElementById('codigo');
     let lugar = document.getElementById('lugar');
@@ -42,6 +44,7 @@ btnGuardar.addEventListener('click',async ()=>{
    }else{
     
     let formData = new FormData();
+    formData.append('id',id);
     formData.append('codigo',codigo.value);
     formData.append('lugar',lugar.value);
     formData.append('fecha',fecha.value);
@@ -51,7 +54,7 @@ btnGuardar.addEventListener('click',async ()=>{
     formData.append('paciente',paciente.value);
  
     spinner.show(btnGuardar);
-    let res = await peticion.post('cita','new',formData);
+    let res = await peticion.post('cita','update',formData);
     spinner.hide(btnGuardar);
     switch (res.status) {
         case 400:
@@ -60,8 +63,7 @@ btnGuardar.addEventListener('click',async ()=>{
             });
             alerta.show('Debes ingresar datos válidos.','danger');
             break;
-        case 201:
-            alerta.show('Cita creada','success');
+        case 200:
             window.location.href = 'index.php?controller=cita';
             break;
         default:

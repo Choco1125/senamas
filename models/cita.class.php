@@ -134,4 +134,48 @@
                 return $ex->errorInfo;
             }
         }
+
+        public function mis_datos(){
+            try {
+                $sql = $this->db_connection->prepare("SELECT * FROM cita WHERE codCita = :codCita");
+                $sql->execute([
+                    ':codCita' => $this->codCita
+                ]);
+
+                while($row  = $sql->fetch(PDO::FETCH_OBJ)){
+                    $this->set_lugar($row->lugar);
+                    $this->set_consultorio($row->consultorio);
+                    $this->set_doctor($row->doctor);
+                    $this->set_fecha($row->fecha);
+                    $this->set_hora($row->hora);
+                    $this->set_fecha_registro($row->fecha_registro);
+                    $this->set_paciente($row->paciente);
+                }
+                return [];
+            } catch (PDOException $ex) {
+                return [
+                    'error' => $ex->getMessage()
+                ];
+            }
+        }
+
+        public function actualizar($codCita){
+            try{
+                $consulta = "UPDATE cita SET codCita = :codCita,lugar = :lugar,consultorio = :consultorio,doctor = :doctor,fecha = :fecha,hora = :hora,paciente = :paciente WHERE codCita = :id";
+                $sql = $this->db_connection->prepare($consulta);
+                $sql->execute([
+                    ':id' => $codCita,
+                    ':codCita' => $this->codCita,
+                    ':lugar' => $this->lugar,
+                    ':consultorio' => $this->consultorio,
+                    ':doctor' => $this->doctor,
+                    ':fecha' => $this->fecha,
+                    ':hora' => $this->hora,
+                    ':paciente' => $this->paciente
+                ]);
+                return [];
+            }catch(PDOException $ex){
+                return $ex->errorInfo;
+            }
+        }
     }

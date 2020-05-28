@@ -74,4 +74,63 @@
                 $this->res(400,'No se seleccionó una cita válida');
             }
         }
+
+        public function editar(){
+            
+            $codigo = isset($_GET['cita'])?$_GET['cita']:'';
+            if(!empty($codigo)){
+                $cita = new Cita();
+                $cita->set_codCita($codigo);
+                $cita->mis_datos();
+                
+                if(!is_null($cita->get_lugar())){
+                    $active = 'cita';
+                    $current_view = 'cita/editar.php';
+                    require 'models/medico.class.php';
+                    $medico = new Medico();
+                    $medicos = $medico->get_all();
+                    require_once 'views/layout/admin_layout.php';
+                }else{
+                    header('location:index.php?controller=doctor');
+                }
+            }else{
+                header('location:index.php?controller=doctor');
+            }
+        }
+
+        public function update(){
+            if(isset($_POST)){
+
+                $id = $_POST['id'];
+                $codigo = trim($_POST['codigo']);
+                $lugar = trim($_POST['lugar']);
+                $consultorio = trim($_POST['consultorio']);
+                $fecha = trim($_POST['fecha']);
+                $hora = trim($_POST['hora']);
+                $doctor = trim($_POST['doctor']);
+                $paciente = trim($_POST['paciente']);
+                $errores = [];
+    
+                if(!$this->is_valid_number($codigo)){
+                    array_push($errores,['input' => 'codigo']);
+                }
+    
+                if(!$this->is_valid_number($paciente)){
+                    array_push($errores,['input' => 'paciente']);
+                }
+    
+                if(count($errores) == 0){
+                    $cita = new Cita($codigo,ucfirst($lugar),$consultorio,$doctor,$fecha,$hora,date('Y-m-d'),$paciente);
+                    $respuesta = $cita->actualizar($id);
+                    if(count($respuesta)==0){
+                        $this->res(200,[]);
+                    }else{
+                        $this->res(500,$respuesta);
+                    }
+                }else{
+                    $this->res(400,$errores);
+                }
+    
+            }
+        }
     }
