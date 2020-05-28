@@ -7,17 +7,17 @@
             <div class="card-body">
                 <div class="form-group ">
                     <label for="codigo">Código</label>
-                    <input type="number" name="codigo" id="codigo" class="form-control" placeholder="Código" autofocus min="0">
+                    <input type="number" name="codigo" id="codigo" class="form-control" placeholder="Código" autofocus min="0" value="<?php  echo $especialiad->get_codigo()?>">
                 </div>
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre">
+                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" value="<?php  echo $especialiad->get_nombre()?>">
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <textarea name="descripcion" id="descripcion" class="form-control" placeholder="Descripción"></textarea>
+                    <textarea name="descripcion" id="descripcion" class="form-control" placeholder="Descripción"><?php  echo $especialiad->get_descripcion()?></textarea>
                 </div>
-                <button class="btn btn-outline-success col-12" id="guardar">Crear</button>
+                <button class="btn btn-outline-success col-12" id="guardar">Actualizar</button>
             </div>
         </div>
     </div>

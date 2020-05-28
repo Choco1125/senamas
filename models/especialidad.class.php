@@ -64,4 +64,39 @@
                 return $ex->errorInfo;
             }
         }
+
+        public function mis_datos(){
+            try{
+                $consulta = "SELECT * FROM especialidad WHERE codigo = :codigo";
+                $sql = $this->db_connection->prepare($consulta);
+                $sql->execute([
+                    ':codigo' => $this->codigo,
+                ]);
+
+                while ($row = $sql->fetch(PDO::FETCH_OBJ)) {
+                    $this->set_nombre($row->nombre);
+                    $this->set_descripcion($row->descripcion);
+                }
+            }catch(PDOException $ex){
+                return $ex->errorInfo;
+            }
+        }
+
+        public function actualizar($codigo_nuevo){
+            try{
+                $consulta = "UPDATE especialidad 
+                            SET codigo = :codigo,nombre = :nombre,descripcion = :descripcion
+                            WHERE codigo = :codigo_antiguo";
+                $sql = $this->db_connection->prepare($consulta);
+                $sql->execute([
+                    ':codigo' => $codigo_nuevo,
+                    ':codigo_antiguo' => $this->codigo,
+                    ':nombre' => $this->nombre,
+                    ':descripcion' => $this->descripcion
+                ]);
+                return [];
+            }catch(PDOException $ex){
+                return $ex->errorInfo;
+            }
+        }
     }

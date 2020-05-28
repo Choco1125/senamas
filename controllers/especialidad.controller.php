@@ -20,9 +20,22 @@
         }
 
         public function editar(){
-            $active = 'especialidad';
-            $current_view = 'especialidad/editar.php';
-            require_once 'views/layout/admin_layout.php';
+            $codigo = isset($_GET['especialiadad'])?$_GET['especialiadad']:'';
+            if(!empty($codigo)){
+                $especialiad = new Especialidad();
+                $especialiad->set_codigo($codigo);
+                $especialiad->mis_datos();
+                if(!is_null($especialiad->get_nombre())){
+                    $active = 'especialidad';
+                    $current_view = 'especialidad/editar.php';
+                    require_once 'views/layout/admin_layout.php';
+                }else{
+                    header('location:index.php?controller=especialidad');
+                }
+                
+            }else{
+                header('location:index.php?controller=especialidad');
+            }
         }
 
         public function new(){
@@ -42,7 +55,7 @@
     
                 if(count($errores) == 0){
                 
-                    $especialiad = new Especialidad($codigo,$nombre,$descripcion);
+                    $especialiad = new Especialidad($codigo,ucfirst($nombre),ucfirst($descripcion));
                     $respuesta = $especialiad->crear();
 
                     if(count($respuesta)==0){
@@ -73,6 +86,38 @@
                 
             }else{
                 $this->res(400,'No se seleccionó una especialidad válida');
+            }
+        }
+
+        public function update(){
+            if(isset($_POST)){
+
+                $id = trim($_POST['id']);
+                $codigo = trim($_POST['codigo']);
+                $nombre = trim($_POST['nombre']);
+                $descripcion = trim($_POST['descripcion']);
+
+    
+                $errores = [];
+    
+                if(!$this->is_valid_number($codigo)){
+                    array_push($errores,['input' => 'codigo']);
+                }
+    
+                if(count($errores) == 0){
+                
+                    $especialiad = new Especialidad($id,ucfirst($nombre),ucfirst($descripcion));
+                    $respuesta = $especialiad->actualizar($codigo);
+
+                    if(count($respuesta)==0){
+                        $this->res(200,[]);
+                    }else{
+                        $this->res(500,$respuesta);
+                    }
+                }else{
+                    $this->res(400,$errores);
+                }
+    
             }
         }
     }
