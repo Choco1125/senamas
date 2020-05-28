@@ -12,6 +12,7 @@ btnGuardar.addEventListener('click', async () => {
     let genero = document.getElementById('genero');
     let perfil_profesional = document.getElementById('perfil_profesional');
     let email = document.getElementById('email');
+    let checkboxEspecialidades = document.getElementsByClassName('custom-control-input');
     //---------------------------------------------------------------------------
     //Validaciones --------------------------------------------------------------
     if (errores.isEmpty(documento)) {
@@ -40,7 +41,15 @@ btnGuardar.addEventListener('click', async () => {
         errores.setError(email);
     }
     //----------------------------------------------------------------------------
-
+   //Agregar especialidades------------------------------------------------------
+   let especialidades = [];
+   for(let i = 0; i< checkboxEspecialidades.length; i++){
+        let especialidad = checkboxEspecialidades.item(i);
+        if(especialidad.checked){
+            especialidades.push(especialidad.id)
+        }
+    }
+   //----------------------------------------------------------------------------
     if (errores.count_errors() > 0) {
         alerta.show('Debes llenar los campos o ingresar datos válidos', 'danger');
     } else {
@@ -54,6 +63,8 @@ btnGuardar.addEventListener('click', async () => {
         formData.append('perfil_profesional', perfil_profesional.value);
         formData.append('email', email.value);
         formData.append('codigo', codigo);
+        formData.append('especialidades',especialidades);
+
         spinner.show(btnGuardar);
         let res = await peticion.post('doctor', 'update', formData);
         spinner.hide(btnGuardar);

@@ -160,5 +160,49 @@
                 echo $ex->getMessage();
             }
         }
+
+        public function set_especialidad($id){
+            try{
+                $consulta = "INSERT INTO medico_especialidad (especialidad,medico) VALUES (:especialidad,:medico)";
+                $sql = $this->db_connection->prepare($consulta);
+                $sql->execute([
+                    ':medico' => $this->codigo,
+                    ':especialidad' => $id
+                ]);
+                return [];
+            }catch(PDOException $ex){
+                return $ex->errorInfo;
+            }
+        }
+
+        public function get_especialidades(){
+            try{
+                $consulta = "SELECT medico_especialidad.especialidad, especialidad.nombre FROM medico_especialidad INNER JOIN especialidad ON medico_especialidad.especialidad = especialidad.codigo WHERE medico_especialidad.medico = :medico";
+                $sql = $this->db_connection->prepare($consulta);
+                $sql->execute([
+                    ':medico' => $this->codigo
+                ]);
+                $resulset = [];
+                while ($row = $sql->fetch(PDO::FETCH_OBJ)) {
+                    $resulset[] = $row->especialidad;
+                }
+                return $resulset;
+            }catch(PDOException $ex){
+                return $ex->errorInfo;
+            }
+        }
+
+        public function remove_especialidad(){
+            try{
+                $consulta = "DELETE FROM medico_especialidad WHERE medico = :medico";
+                $sql = $this->db_connection->prepare($consulta);
+                $sql->execute([
+                    ':medico' => $this->codigo
+                ]);
+                return [];
+            }catch(PDOException $ex){
+                return $ex->errorInfo;
+            }
+        }
         
     }

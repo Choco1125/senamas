@@ -42,6 +42,18 @@
                 </div>
                 <div class="form-group col-md-12">
                     <h5>Especialidades</h5>
+                    <?php
+                        if(isset($especialidades)){
+                            foreach($especialidades as $especialidad){
+                    ?>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="<?php echo $especialidad->codigo?>" <?php echo in_array($especialidad->codigo,$mis_especialidades)?'checked':'' ?>>
+                            <label class="custom-control-label" for="<?php echo $especialidad->codigo?>"><?php echo $especialidad->nombre?></label>
+                        </div>
+                    <?php
+                            }
+                        }
+                    ?>
                 </div>
                 <button class="btn btn-outline-success col-12" id="guardar">Actualizar</button>
             </div>

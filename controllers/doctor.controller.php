@@ -15,9 +15,12 @@
 
         public function crear(){
             
+            require 'models/especialidad.class.php';
+
             $active = 'doctor';
             $current_view = 'doctor/crear.php';
-
+            $especialidad = new Especialidad();
+            $especialidades = $especialidad->get_all();
             require_once 'views/layout/admin_layout.php';
         }
 
@@ -30,6 +33,10 @@
 
                 $medico->mis_datos();
                 if(!is_null($medico->get_nombre())){
+                    require 'models/especialidad.class.php';
+                    $especialidad = new Especialidad();
+                    $especialidades = $especialidad->get_all();
+                    $mis_especialidades = $medico->get_especialidades();
                     $active = 'doctor';
                     $current_view = 'doctor/editar.php';
     
@@ -54,7 +61,7 @@
                 $perfil_profesional = trim($_POST['perfil_profesional']);
                 $fecha_ingreso = trim($_POST['fecha_ingreso']);
                 $anos_experiencia = trim($_POST['anos_experiencia']);        
-    
+                $especialidades = explode(',',$_POST['especialidades']);
                 $errores = [];
     
                 if(!$this->is_valid_number($documento)){
@@ -70,9 +77,14 @@
     
                 if(count($errores) == 0){
                 
-                    $medico = new Medico($documento,ucwords($nombre),$documento,$genero,$email,$perfil_profesional,$fecha_ingreso,$anos_experiencia,$fecha_naciemiento);
+                    $medico = new Medico($documento,ucwords($nombre),$documento,$genero,$email,$perfil_profesional,$fecha_ingreso,$anos_experiencia,$fecha_naciemiento);                   
                     $respuesta = $medico->crear();
                     if(count($respuesta)==0){
+                        if(count($especialidades)>0){
+                            foreach($especialidades as $especialidad){
+                                $medico->set_especialidad($especialidad);
+                            }
+                        }
                         $this->res(201,[]);
                     }else{
                         $this->res(500,$respuesta);
@@ -113,7 +125,7 @@
                 $perfil_profesional = trim($_POST['perfil_profesional']);
                 $fecha_ingreso = trim($_POST['fecha_ingreso']);
                 $anos_experiencia = trim($_POST['anos_experiencia']);        
-    
+                $especialidades = explode(',',$_POST['especialidades']);
                 $errores = [];
     
                 if(!$this->is_valid_number($documento)){
@@ -131,7 +143,14 @@
                 
                     $medico = new Medico($codigo,ucwords($nombre),$documento,$genero,$email,$perfil_profesional,$fecha_ingreso,$anos_experiencia,$fecha_naciemiento);
                     $respuesta = $medico->actualizar();
+                    
                     if(count($respuesta)==0){
+                        $medico->remove_especialidad();
+                        if(count($especialidades)>0){
+                            foreach($especialidades as $especialidad){
+                                $medico->set_especialidad($especialidad);
+                            }
+                        }
                         $this->res(200,[]);
                     }else{
                         $this->res(500,$respuesta);
