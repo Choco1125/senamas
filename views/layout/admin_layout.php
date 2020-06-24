@@ -12,7 +12,7 @@
 <body>
     
     <?php
-        require_once 'views/menus/admin.php';
+        require_once 'views/menus/'.$_SESSION['rol'].'.php';
         require_once 'views/'.$current_view;
     ?>
 

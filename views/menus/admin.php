@@ -5,15 +5,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-            <!-- <li class="nav-item  <?php echo ($active == 'inicio')?'active':'' ?>">
-                <a class="nav-link" href="#">Inico</a>
-            </li>
-            <li class="nav-item <?php echo ($active == 'paciente')?'active':'' ?>">
-                <a class="nav-link" href="index.php?controller=paciente">Pacientes</a>
-            </li>
-            <li class="nav-item <?php echo ($active == '')?'active':'' ?>">
-                <a class="nav-link" href="#">Pricing</a>
-            </li> -->
             <li class="nav-item dropdown <?php echo ($active == 'cita')?'active':'' ?>">
                 <a class="nav-link dropdown-toggle" href="#" id="desple-citas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Citas
