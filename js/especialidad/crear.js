@@ -30,7 +30,6 @@ btnGuardar.addEventListener('click',async ()=>{
     spinner.show(btnGuardar);
     let res = await peticion.post('especialidad','new',formData);
     spinner.hide(btnGuardar);
-    console.log(res)
     switch (res.status) {
         case 400:
             res.body.forEach(({input}) => {

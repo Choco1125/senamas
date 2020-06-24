@@ -50,6 +50,9 @@
                     <a class="dropdown-item" href="index.php?controller=paciente">Ver</a>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?controller=login&action=log_out">Cerrar sesión</a>
+            </li>
         </ul>
     </div>
 </nav>

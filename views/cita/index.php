@@ -52,7 +52,7 @@
                     }else{
                 ?>
                     <tr>
-                        <td colspan="5">No hay doctores registrados</td>
+                        <td colspan="8">No hay doctores registrados</td>
                     </tr>
                 <?php
                     }

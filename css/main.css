@@ -3,3 +3,8 @@ body div.alert{
     position: fixed;
     right: 5px;
 }
+
+
+main.container section.row{
+    height: 100vh;
+}

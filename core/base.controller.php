@@ -1,10 +1,20 @@
 <?php
     class BaseController{
-        public function __construct($model){
+        public function __construct($model=null){
             require_once 'connection.php';
             require_once 'base.model.php';
-            require_once 'models/'.$model.'.class.php';
+            if(!empty($model)){
+                require_once 'models/'.$model.'.class.php';
+            }
 
+            if(session_status() !== 'PHP_SESSION_ACTIVE'){
+				session_start();
+			}
+        }
+
+        public function is_login()
+        {
+            return isset($_SESSION['rol']);
         }
 
         public function is_valid_number($value){
