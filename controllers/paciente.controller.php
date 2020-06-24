@@ -2,9 +2,13 @@
  class PacienteController extends BaseController{
     public function __construct(){
         parent::__construct('paciente');
+        
     }
 
     public function index(){
+        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+            $this->go_to_home();
+        }
         $obj_paciente =  new Paciente();
         $all_pacientes = $obj_paciente->get_all();
         $active = 'paciente';
@@ -14,12 +18,18 @@
     }
 
     public function crear(){
+        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+            $this->go_to_home();
+        }
         $active = 'paciente';
         $current_view = 'pacientes/crear.php';
         require_once 'views/layout/admin_layout.php';
     }
 
     public function editar(){
+        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+            $this->go_to_home();
+        }
         $documento = isset($_GET['paciente'])?$_GET['paciente']:'';
         if(!empty($documento)){
             $obj_paciente = new Paciente();
@@ -35,6 +45,9 @@
     }
 
     public function create(){
+        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+            $this->go_to_home();
+        }
         if(isset($_POST)){
 
             $documento = trim($_POST['documento']);
@@ -78,6 +91,9 @@
     }
     
     public function borrar(){
+        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+            $this->go_to_home();
+        }
         $id = isset($_POST['documento'])?$_POST['documento']:'';
         if(!empty($id)){
             $obj_paciente = new Paciente();
@@ -98,6 +114,9 @@
     }
     
     public function update(){
+        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+            $this->go_to_home();
+        }
         $documento_old = isset($_POST['documento_old'])?$_POST['documento_old']:'';
 
         if(isset($documento_old)){

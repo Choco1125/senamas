@@ -31,4 +31,15 @@
 
             echo json_encode($res);
         }
+
+        public function is_valid_rol($rol,$valids)
+        {
+            // $roles = ['paciente','medico','admin'];
+            return in_array($rol,$valids);
+        }
+
+        public function go_to_home()
+        {
+            header('location: '.URL);
+        }
     }

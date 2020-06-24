@@ -5,6 +5,9 @@
         }
 
         public function index(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $especialiad = new Especialidad();
             $especialiadades = $especialiad->get_all();
 
@@ -14,12 +17,18 @@
         }
 
         public function crear(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $active = 'especialidad';
             $current_view = 'especialidad/crear.php';
             require_once 'views/layout/admin_layout.php';
         }
 
         public function editar(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $codigo = isset($_GET['especialiadad'])?$_GET['especialiadad']:'';
             if(!empty($codigo)){
                 $especialiad = new Especialidad();
@@ -39,6 +48,9 @@
         }
 
         public function new(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
 
             if(isset($_POST)){
 
@@ -90,6 +102,9 @@
         }
 
         public function update(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             if(isset($_POST)){
 
                 $id = trim($_POST['id']);

@@ -5,6 +5,9 @@
         }
 
         public function index(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $medico = new Medico();
             $medicos = $medico->get_all();
             
@@ -14,7 +17,9 @@
         }
 
         public function crear(){
-            
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             require 'models/especialidad.class.php';
 
             $active = 'doctor';
@@ -26,6 +31,9 @@
 
         public function editar(){
 
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $codigo = isset($_GET['medico'])?$_GET['medico']:'';
             if(!empty($codigo)){
                 $medico = new Medico();
@@ -51,6 +59,9 @@
         }
 
         public function new(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             if(isset($_POST)){
 
                 $nombre = trim($_POST['nombre']);
@@ -96,6 +107,9 @@
             }
         }
         public function delete(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $id = isset($_POST['documento'])?$_POST['documento']:'';
             if(!empty($id)){
                 $medico = new Medico();
@@ -114,6 +128,9 @@
             }
         }
         public function update(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             if(isset($_POST)){
 
                 $codigo = $_POST['codigo'];

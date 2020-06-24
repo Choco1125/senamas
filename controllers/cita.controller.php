@@ -2,6 +2,9 @@
     class CitaController extends BaseController{
         public function __construct(){
             parent::__construct('cita');
+            if(!$this->is_login()){
+                $this->go_to_home();
+            }
         }
 
         public function index(){
