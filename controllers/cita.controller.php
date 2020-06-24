@@ -9,7 +9,23 @@
 
         public function index(){
             $cita = new Cita();
-            $citas = $cita->seleccionar_todos();
+            switch ($_SESSION['rol']) {
+                case 'admin':
+                    $citas = $cita->seleccionar_todos();
+                    break;
+                case 'medico':
+                    $cita->set_doctor($_SESSION['id']);
+                    $citas = $cita->seleccionar_todos_por_medico();
+                    break;
+                case 'paciente':
+                    $cita->set_paciente($_SESSION['id']);
+                    $citas = $cita->seleccionar_todos_por_paciente();
+                    break;
+                default:
+                    header('location: '.URL.'?controller=login&action=log_out');
+                    break;
+            }
+
             $active = 'cita';
             $current_view = 'cita/index.php';
             require_once 'views/layout/admin_layout.php';

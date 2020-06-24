@@ -7,7 +7,7 @@
             crear
         </a>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center table-responsive">
         <table class="table table-bordered mt-3 mb-2 text-center">
             <thead>
                 <th scope="col">Codigo</th>
@@ -52,7 +52,7 @@
                     }else{
                 ?>
                     <tr>
-                        <td colspan="8">No hay doctores registrados</td>
+                        <td colspan="8">No hay citas registradas</td>
                     </tr>
                 <?php
                     }

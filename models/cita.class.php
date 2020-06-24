@@ -178,4 +178,40 @@
                 return $ex->errorInfo;
             }
         }
+
+        public function seleccionar_todos_por_paciente(){
+            try {
+                $slq = $this->db_connection->prepare("SELECT cita.codCita, cita.lugar,cita.consultorio,medico.nombre AS doctor ,cita.fecha,cita.hora,paciente.nombre AS paciente FROM cita INNER JOIN medico ON cita.doctor = medico.codigo INNER JOIN paciente ON paciente.documento = cita.paciente AND cita.paciente = :paciente");
+                $slq->execute([
+                    'paciente' => $this->paciente
+                ]);
+                $result_set = null;
+
+                while($row  = $slq->fetch(PDO::FETCH_OBJ)){
+                    $result_set[] = $row;
+                }
+                return $result_set;
+            } catch (PDOException $ex) {
+                echo $ex->getMessage();
+                die();
+            }
+        }
+
+        public function seleccionar_todos_por_medico(){
+            try {
+                $slq = $this->db_connection->prepare("SELECT cita.codCita, cita.lugar,cita.consultorio,medico.nombre AS doctor ,cita.fecha,cita.hora,paciente.nombre AS paciente FROM cita INNER JOIN medico ON cita.doctor = medico.codigo INNER JOIN paciente ON paciente.documento = cita.paciente AND cita.doctor = :doctor");
+                $slq->execute([
+                    'doctor' => $this->doctor
+                ]);
+                $result_set = null;
+
+                while($row  = $slq->fetch(PDO::FETCH_OBJ)){
+                    $result_set[] = $row;
+                }
+                return $result_set;
+            } catch (PDOException $ex) {
+                echo $ex->getMessage();
+                die();
+            }
+        }
     }

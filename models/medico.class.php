@@ -81,7 +81,7 @@
 
         public function crear(){
             try{
-                $consulta = "INSERT INTO medico (codigo,nombre,documento,fecha_nacimiento,genero,email,perfil_profesional,fecha_ingreso,anos_experiencia) VALUES (:codigo,:nombre,:documento,:fecha_nacimiento,:genero,:email,:perfil_profesional,:fecha_ingreso,:anos_experiencia)";
+                $consulta = "INSERT INTO medico (codigo,nombre,documento,fecha_nacimiento,genero,email,password,perfil_profesional,fecha_ingreso,anos_experiencia) VALUES (:codigo,:nombre,:documento,:fecha_nacimiento,:genero,:email,:password,:perfil_profesional,:fecha_ingreso,:anos_experiencia)";
                 $sql = $this->db_connection->prepare($consulta);
                 $sql->execute([
                     ':codigo' => $this->codigo,
@@ -90,6 +90,7 @@
                     ':fecha_nacimiento' => $this->fecha_nacimiento,
                     ':genero' => $this->genero,
                     ':email' => $this->email,
+                    ':password' => $this->documento,
                     ':perfil_profesional' => $this->perfil_profesional,
                     ':fecha_ingreso' => $this->fecha_ingreso,
                     ':anos_experiencia' => $this->anos_experiencia

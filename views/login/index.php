@@ -13,7 +13,7 @@
     
     <main class="container">
         <section class="row justify-content-center align-items-center">
-            <article class="card col-10 col-md-5 col-md-4">
+            <article class="card col-10 col-md-5 col-lg-4">
                 <div class="card-body">
                     <img src="images/logo.ico" alt="Logo" class="card-img-top mb-2">
                     <div class="form-group">
