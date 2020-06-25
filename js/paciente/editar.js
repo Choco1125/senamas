@@ -57,7 +57,7 @@ btnGuardar.addEventListener('click',async ()=>{
     formData.append('genero',genero.value);
     formData.append('eps',eps.value);
     formData.append('email',email.value);
-    formData.append('codigo',codigo);
+    formData.append('documento_old',codigo);
     spinner.show(btnGuardar);
     let res = await peticion.post('paciente','update',formData);
     spinner.hide(btnGuardar);   

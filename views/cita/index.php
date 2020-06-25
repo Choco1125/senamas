@@ -7,8 +7,8 @@
             crear
         </a>
     </div>
-    <div class="row form-row justify-content-end mt-2 <? echo $_SESSION['rol'] == 'paciente' ? 'd-none':''?>">
-        <div class="col-md-3 col-4 <? echo $_SESSION['rol']!= 'admin'? 'd-none':''?>">
+    <div class="row form-row justify-content-aroun mt-2 <? echo $_SESSION['rol'] == 'paciente' ? 'd-none':''?>">
+        <div class="col-md-3 col-10 <? echo $_SESSION['rol']!= 'admin'? 'd-none':''?>">
             <select name="medico" id="medico" class="custom-select">
                 <option value="<? echo $_SESSION['rol']== 'medico'? $_SESSION['id']:''?>">Selecciona un doctor</option>
                 <?php 
@@ -24,7 +24,7 @@
                 ?>
             </select>
         </div>
-        <div class="col-md-3 col-4">
+        <div class="col-md-3 col-10">
             <input type="date" id="fecha" class="form-control">
         </div>
         <div class="col-1">

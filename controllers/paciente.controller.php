@@ -119,7 +119,7 @@
         }
         $documento_old = isset($_POST['documento_old'])?$_POST['documento_old']:'';
 
-        if(isset($documento_old)){
+        if(!empty($documento_old)){
             $documento = trim($_POST['documento']);
             $nombre = trim($_POST['nombre']);
             $direccion = trim($_POST['direccion']);
@@ -130,6 +130,7 @@
             $eps = trim($_POST['eps']);
             $email = trim($_POST['email']);
             $password = trim($_POST['documento']);
+
 
             $errores = [];
 
@@ -149,7 +150,7 @@
                 $respuesta = $obj_paciente->update($documento_old);
 
                 if(count($respuesta)==0){
-                    $this->res(200,[]);
+                    $this->res(200,['paciente'=>$obj_paciente]);
                 }else{
                     $this->res(500,$respuesta);
                 }
