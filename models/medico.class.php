@@ -90,7 +90,7 @@
                     ':fecha_nacimiento' => $this->fecha_nacimiento,
                     ':genero' => $this->genero,
                     ':email' => $this->email,
-                    ':password' => $this->documento,
+                    ':password' => password_hash($this->documento,PASSWORD_DEFAULT),
                     ':perfil_profesional' => $this->perfil_profesional,
                     ':fecha_ingreso' => $this->fecha_ingreso,
                     ':anos_experiencia' => $this->anos_experiencia

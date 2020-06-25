@@ -75,7 +75,7 @@
             }
 
             if(count($errores) == 0){
-                $obj_paciente = new Paciente($documento,ucwords($nombre),$direccion,$telefono,$fecha_naciemiento,$estado,$genero,$eps,$email,$password);
+                $obj_paciente = new Paciente($documento,ucwords($nombre),$direccion,$telefono,$fecha_naciemiento,$estado,$genero,$eps,$email,password_hash($password,PASSWORD_DEFAULT));
                 $respuesta = $obj_paciente->save();
 
                 if(count($respuesta)==0){

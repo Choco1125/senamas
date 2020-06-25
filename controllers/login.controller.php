@@ -47,7 +47,7 @@
 
         public function is_same_password($contrasena,$password)
         {
-            return $contrasena === $password;
+            return password_verify($contrasena,$password);
         }
 
         public function validate_data($contrasena,$login,$id)

@@ -18,6 +18,9 @@
         case 'cita':
             $controlador = 'cita';
             break;
+        case 'admins':
+            $controlador = 'admins';
+            break;
         default:
             $controlador = CONTROLLADOR_DEFECTO;
             break;
