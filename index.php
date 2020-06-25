@@ -21,6 +21,9 @@
         case 'admins':
             $controlador = 'admins';
             break;
+        case 'password':
+            $controlador = 'password';
+            break;
         default:
             $controlador = CONTROLLADOR_DEFECTO;
             break;

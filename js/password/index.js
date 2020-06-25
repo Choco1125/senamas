@@ -1,23 +1,15 @@
 let btnGuardar = document.getElementById('guardar');
 
 btnGuardar.addEventListener('click',async ()=>{
-    let id = location.search.split('=')[location.search.split('=').length-1];
 
     //Inputs-----------------------------------------------------------------
-    let codigo = document.getElementById('codigo');
-    let nombre = document.getElementById('nombre');
-    let descripcion = document.getElementById('descripcion');
+    let password = document.getElementById('password');
    //---------------------------------------------------------------------------
    //Validaciones --------------------------------------------------------------
-   if(errores.isEmpty(codigo)){
-    errores.setError(codigo);
+   if(errores.isEmpty(password)){
+    errores.setError(password);
    }
-   if(errores.isEmpty(nombre)){
-    errores.setError(nombre);
-   }
-   if(errores.isEmpty(descripcion)){
-    errores.setError(descripcion);
-   }
+   
 
    //----------------------------------------------------------------------------
 
@@ -25,15 +17,11 @@ btnGuardar.addEventListener('click',async ()=>{
     alerta.show('Debes llenar los campos o ingresar datos válidos','danger');
    }else{
     let formData = new FormData();
-    formData.append('id',id);
-    formData.append('codigo',codigo.value);
-    formData.append('nombre',nombre.value);
-    formData.append('descripcion',descripcion.value);
+    formData.append('password',password.value);
 
     spinner.show(btnGuardar);
-    let res = await peticion.post('especialidad','update',formData);
+    let res = await peticion.post('password','update',formData);
     spinner.hide(btnGuardar);
-    console.log(res)
     switch (res.status) {
         case 400:
             res.body.forEach(({input}) => {
@@ -42,7 +30,8 @@ btnGuardar.addEventListener('click',async ()=>{
             alerta.show('Debes ingresar datos válidos.','danger');
             break;
         case 200:
-            window.location.href = 'index.php?controller=especialidad';
+            alerta.show('Contraseña actualizada','success');
+            window.location.href = 'index.php';
             break;
         default:
             alerta.show('Error al intentar crear, por favor intenta más tarde.');

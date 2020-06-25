@@ -8,13 +8,13 @@
             <li class="nav-item <?php echo ($active == 'cita')?'active':'' ?>">
                 <a class="nav-link" href="index.php?controller=cita">Citas</a>
             </li>
-            <li class="nav-item dropdown <?php echo ($active == 'admins')?'active':'' ?>">
+            <li class="nav-item dropdown <?php echo ($active == 'password')?'active':'' ?>">
                 <a class="nav-link dropdown-toggle" href="#" id="desple-pacientes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Cuenta
                 </a>
                 <div class="dropdown-menu" aria-labelledby="desple-pacientes">
                     <a class="dropdown-item" href="index.php?controller=doctor&action=editar&medico=<?echo $_SESSION['id']?>">Mis datos</a>
-                    <a class="dropdown-item" href="index.php?controller=admins">Ver</a>
+                    <a class="dropdown-item" href="index.php?controller=password">Cambiar contraseña</a>
                 </div>
             </li>
             <li class="nav-item">

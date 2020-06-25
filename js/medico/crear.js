@@ -75,7 +75,6 @@ btnGuardar.addEventListener('click',async ()=>{
             alerta.show('Debes ingresar datos válidos.','danger');
             break;
         case 201:
-            alerta.show('Médico creado','success');
             window.location.href = 'index.php?controller=doctor';
             break;
         default:

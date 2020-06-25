@@ -38,7 +38,6 @@ btnGuardar.addEventListener('click',async ()=>{
             alerta.show('Debes ingresar datos válidos.','danger');
             break;
         case 201:
-            alerta.show('Especialidad creada','success');
             window.location.href = 'index.php?controller=especialidad';
             break;
         default:
