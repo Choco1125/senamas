@@ -197,12 +197,47 @@
             }
         }
 
-        public function seleccionar_todos_por_medico(){
+        public function seleccionar_todos_por_medico($fecha = ""){
             try {
-                $slq = $this->db_connection->prepare("SELECT cita.codCita, cita.lugar,cita.consultorio,medico.nombre AS doctor ,cita.fecha,cita.hora,paciente.nombre AS paciente FROM cita INNER JOIN medico ON cita.doctor = medico.codigo INNER JOIN paciente ON paciente.documento = cita.paciente AND cita.doctor = :doctor");
+                if(empty($fecha)){
+                    $consulta = "SELECT cita.codCita, cita.lugar,cita.consultorio,medico.nombre AS doctor ,cita.fecha,cita.hora,paciente.nombre AS paciente FROM cita INNER JOIN medico ON cita.doctor = medico.codigo INNER JOIN paciente ON paciente.documento = cita.paciente AND cita.doctor = :doctor";
+                }else{
+                    $consulta = "SELECT cita.codCita, cita.lugar,cita.consultorio,medico.nombre AS doctor ,cita.fecha,cita.hora,paciente.nombre AS paciente FROM cita INNER JOIN medico ON cita.doctor = medico.codigo INNER JOIN paciente ON paciente.documento = cita.paciente AND cita.doctor = :doctor AND cita.fecha = :fecha";
+                }   
+                $slq = $this->db_connection->prepare($consulta);
+                if(!empty($fecha)){
+                    $slq->execute([
+                        'doctor' => $this->doctor,
+                        'fecha' => $fecha
+                    ]);
+                }else{
+                    $slq->execute([
+                        'doctor' => $this->doctor
+                    ]);
+                }
+                
+                $result_set = null;
+
+                while($row  = $slq->fetch(PDO::FETCH_OBJ)){
+                    $result_set[] = $row;
+                }
+                return $result_set;
+            } catch (PDOException $ex) {
+                echo $ex->getMessage();
+                die();
+            }
+        }
+
+        public function seleccionar_todos_por_fecha($fecha){
+            try {
+                $consulta = "SELECT cita.codCita, cita.lugar,cita.consultorio,medico.nombre AS doctor ,cita.fecha,cita.hora,paciente.nombre AS paciente FROM cita INNER JOIN medico ON cita.doctor = medico.codigo INNER JOIN paciente ON paciente.documento = cita.paciente AND cita.fecha = :fecha";
+                
+                $slq = $this->db_connection->prepare($consulta);
+                
                 $slq->execute([
-                    'doctor' => $this->doctor
+                    'fecha' => $fecha
                 ]);
+
                 $result_set = null;
 
                 while($row  = $slq->fetch(PDO::FETCH_OBJ)){

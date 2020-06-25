@@ -11,6 +11,10 @@
             $cita = new Cita();
             switch ($_SESSION['rol']) {
                 case 'admin':
+                    require 'models/medico.class.php';
+                    $medico = new Medico();
+                    $medicos = $medico->get_all();
+                    require 'models/paciente.class.php';
                     $citas = $cita->seleccionar_todos();
                     break;
                 case 'medico':
@@ -32,15 +36,25 @@
         }
 
         public function crear(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $active = 'cita';
             $current_view = 'cita/crear.php';
             require 'models/medico.class.php';
             $medico = new Medico();
             $medicos = $medico->get_all();
+            require 'models/paciente.class.php';
+            $paciente = new Paciente();
+            $pacientes = $paciente->get_all();
+
             require_once 'views/layout/admin_layout.php';
         }
 
         public function new(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             if(isset($_POST)){
 
                 $codigo = trim($_POST['codigo']);
@@ -76,6 +90,9 @@
         }
 
         public function delete(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $codCita = isset($_POST['codCita'])?$_POST['codCita']:'';
             if(!empty($codCita)){
                 $cita = new Cita();
@@ -95,7 +112,9 @@
         }
 
         public function editar(){
-            
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             $codigo = isset($_GET['cita'])?$_GET['cita']:'';
             if(!empty($codigo)){
                 $cita = new Cita();
@@ -118,6 +137,9 @@
         }
 
         public function update(){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+                $this->go_to_home();
+            }
             if(isset($_POST)){
 
                 $id = $_POST['id'];
@@ -151,5 +173,21 @@
                 }
     
             }
+        }
+
+        public function filtrar()
+        {
+            $doctor = $_POST['doctor'];
+            $fecha = $_POST['fecha'];
+
+            $cita =  new Cita();
+            if(!empty($doctor)){
+                $cita->set_doctor($doctor);
+                $citas = $cita->seleccionar_todos_por_medico($fecha);
+            }else{
+                $citas = $cita->seleccionar_todos_por_fecha($fecha);
+
+            }
+            echo json_encode(['citas'=> $citas]);
         }
     }

@@ -34,7 +34,6 @@
 
         public function is_valid_rol($rol,$valids)
         {
-            // $roles = ['paciente','medico','admin'];
             return in_array($rol,$valids);
         }
 

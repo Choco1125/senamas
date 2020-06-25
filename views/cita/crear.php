@@ -25,7 +25,7 @@
                     <label for="hora">Hora</label>
                     <input type="time" name="hora" id="hora" class="form-control" placeholder="Hora">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 ">
                     <label for="doctor">Doctor</label>
                     <select name="doctor" id="doctor" class="custom-select">
                         <?php
@@ -43,7 +43,20 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="paciente">Documento del paciente</label>
-                    <input type="text" name="paciente" id="paciente" class="form-control" placeholder="Documento del paciente">
+                    <select name="paciente" id="paciente" class="custom-select">
+                            <?php 
+                                if(isset($pacientes)){
+                                    foreach($pacientes as $paciente){
+                            ?>
+                                <option value="<? echo $paciente->documento ?>">
+                                    <? echo $paciente->nombre ?>( <? echo $paciente->documento ?> )
+                                </option>
+                            <?php
+                                    }
+                                }
+                            ?>
+                    </select>
+                    <!-- <input type="text" name="paciente" id="paciente" class="form-control" placeholder="Documento del paciente"> -->
                 </div>
                 
                 <button class="btn btn-outline-success col-12" id="guardar">Crear</button>

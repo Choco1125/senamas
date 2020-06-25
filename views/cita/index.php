@@ -2,10 +2,34 @@
     <div class="row justify-content-center">
         <h1 class="mt-2" >Citas</h1>
     </div>
-    <div class="row justify-content-end">
+    <div class="row justify-content-end  <? echo $_SESSION['rol'] == 'paciente' || $_SESSION['rol'] == 'medico'? 'd-none':''?>">
         <a href="index.php?controller=cita&action=crear" class="btn btn-outline-primary">
             crear
         </a>
+    </div>
+    <div class="row form-row justify-content-end mt-2 <? echo $_SESSION['rol'] == 'paciente' ? 'd-none':''?>">
+        <div class="col-md-3 col-4 <? echo $_SESSION['rol']!= 'admin'? 'd-none':''?>">
+            <select name="medico" id="medico" class="custom-select">
+                <option value="<? echo $_SESSION['rol']== 'medico'? $_SESSION['id']:''?>">Selecciona un doctor</option>
+                <?php 
+                    if(isset($medicos)){
+                        foreach($medicos as $doctor){
+                ?>
+                            <option value="<?php echo $doctor->codigo;?>">
+                                <?php echo $doctor->nombre .'-'. $doctor->codigo;?>
+                            </option>
+                <?php
+                        }
+                    }
+                ?>
+            </select>
+        </div>
+        <div class="col-md-3 col-4">
+            <input type="date" id="fecha" class="form-control">
+        </div>
+        <div class="col-1">
+            <button class="btn btn-outline-primary" id="btn-buscar"><i class="fas fa-search"></i></button>
+        </div>
     </div>
     <div class="row justify-content-center table-responsive">
         <table class="table table-bordered mt-3 mb-2 text-center">
@@ -17,7 +41,7 @@
                 <th scope="col">Fecha</th>
                 <th scope="col">Hora</th>
                 <th scope="col">Paciente</th>
-                <th scope="col">Opciones</th>
+                <th scope="col" class="<? echo $_SESSION['rol'] == 'paciente' || $_SESSION['rol'] == 'medico'? 'd-none':''?>">Opciones</th>
             </thead>
             <tbody id="tbody">
                 <?php
@@ -32,14 +56,14 @@
                         <td><?php echo $cita->fecha; ?></td>
                         <td><?php echo $cita->hora; ?></td>
                         <td><?php echo $cita->paciente; ?></td>
-                        <th>
-                            <a class="btn btn-outline-primary btn-sm col-12 col-md-3" 
+                        <th class="<? echo $_SESSION['rol'] == 'paciente' || $_SESSION['rol'] == 'medico'? 'd-none':''?>">
+                            <a class="btn btn-outline-primary btn-sm " 
                                 href="<?php echo URL?>?controller=cita&action=editar&cita=<?php echo $cita->codCita?>" >
                                 <i class="fas fa-edit"></i>
                             </a>
                             &nbsp;
                             <button 
-                                class="btn btn-outline-danger btn-sm col-12 col-md-3" 
+                                class="btn btn-outline-danger btn-sm " 
                                 onclick="eliminar(<?php echo $cita->codCita; ?>)"
                                 data-toggle="modal" data-target="#eliminar"
                             >
