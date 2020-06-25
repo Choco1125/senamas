@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="fecha_ingreso">Fecha ingreso</label>
-                    <input type="date" name="fecha_ingreso" id="fecha_ingreso" class="form-control" placeholder="Fecha nacimiento"value="<?php echo $medico->get_fecha_ingreso()?>">
+                    <input type="date" name="fecha_ingreso" id="fecha_ingreso" class="form-control" placeholder="Fecha nacimiento"value="<?php echo $medico->get_fecha_ingreso()?>" <? echo $_SESSION['rol'] != 'admin'?'disabled':'' ?>>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="genero">Género</label>
@@ -47,7 +47,7 @@
                             foreach($especialidades as $especialidad){
                     ?>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="<?php echo $especialidad->codigo?>" <?php echo in_array($especialidad->codigo,$mis_especialidades)?'checked':'' ?>>
+                            <input type="checkbox" class="custom-control-input" id="<?php echo $especialidad->codigo?>" <?php echo in_array($especialidad->codigo,$mis_especialidades)?'checked':'' ?> <? echo $_SESSION['rol'] != 'admin'?'disabled':'' ?>>
                             <label class="custom-control-label" for="<?php echo $especialidad->codigo?>"><?php echo $especialidad->nombre?></label>
                         </div>
                     <?php

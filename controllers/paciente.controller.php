@@ -27,10 +27,16 @@
     }
 
     public function editar(){
-        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin','paciente'])){
             $this->go_to_home();
         }
         $documento = isset($_GET['paciente'])?$_GET['paciente']:'';
+       
+        if($_SESSION['rol'] == 'paciente'){
+            if($documento != $_SESSION['id']){
+                $this->go_to_home();
+            }
+        }
         if(!empty($documento)){
             $obj_paciente = new Paciente();
             $obj_paciente->set_documento($documento);
@@ -114,7 +120,7 @@
     }
     
     public function update(){
-        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+        if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin','paciente'])){
             $this->go_to_home();
         }
         $documento_old = isset($_POST['documento_old'])?$_POST['documento_old']:'';

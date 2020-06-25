@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="estado">Estado</label>
-                    <select name="estado" id="estado" class="custom-select">
+                    <select name="estado" id="estado" class="custom-select" <? echo $_SESSION['rol'] != 'admin' ? 'disabled':'' ?>>
                         <option value="activo" <?php echo $obj_paciente->get_estado() == 'activo'?'selected':'' ?>>Activo</option>
                         <option value="inactivo" <?php echo $obj_paciente->get_estado() == 'inactivo'?'selected':'' ?>>Inactivo</option>
                         <option value="multado" <?php echo $obj_paciente->get_estado() == 'multado'?'selected':'' ?>>Con multa</option>

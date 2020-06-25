@@ -31,10 +31,16 @@
 
         public function editar(){
 
-            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin','medico'])){
                 $this->go_to_home();
             }
             $codigo = isset($_GET['medico'])?$_GET['medico']:'';
+
+            if($_SESSION['rol'] == 'medico'){
+                if($codigo != $_SESSION['id']){
+                    $this->go_to_home();
+                }
+            }
             if(!empty($codigo)){
                 $medico = new Medico();
                 $medico->set_codigo($codigo);
@@ -128,7 +134,7 @@
             }
         }
         public function update(){
-            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin'])){
+            if(!$this->is_login() || !$this->is_valid_rol($_SESSION['rol'],['admin','medico'])){
                 $this->go_to_home();
             }
             if(isset($_POST)){
