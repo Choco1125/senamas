@@ -25,7 +25,7 @@
                     <label for="hora">Hora</label>
                     <input type="time" name="hora" id="hora" class="form-control" placeholder="Hora">
                 </div>
-                <div class="form-group col-md-6 ">
+                <div class="form-group col-md-6">
                     <label for="doctor">Doctor</label>
                     <select name="doctor" id="doctor" class="custom-select">
                         <?php
@@ -56,7 +56,6 @@
                                 }
                             ?>
                     </select>
-                    <!-- <input type="text" name="paciente" id="paciente" class="form-control" placeholder="Documento del paciente"> -->
                 </div>
                 
                 <button class="btn btn-outline-success col-12" id="guardar">Crear</button>

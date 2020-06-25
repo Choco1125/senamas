@@ -127,6 +127,9 @@
                     require 'models/medico.class.php';
                     $medico = new Medico();
                     $medicos = $medico->get_all();
+                    require 'models/paciente.class.php';
+                    $paciente = new Paciente();
+                    $pacientes = $paciente->get_all();
                     require_once 'views/layout/admin_layout.php';
                 }else{
                     header('location:index.php?controller=doctor');

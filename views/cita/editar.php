@@ -42,8 +42,20 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="paciente">Documento del paciente</label>
-                    <input type="text" name="paciente" id="paciente" class="form-control" placeholder="Documento del paciente" value="<?php echo $cita->get_paciente();?>">
+                    <label for="paciente">Paciente</label>
+                    <select name="paciente" id="paciente" class="custom-select">
+                            <?php 
+                                if(isset($pacientes)){
+                                    foreach($pacientes as $paciente){
+                            ?>
+                                <option value="<? echo $paciente->documento ?>" <? echo $cita->get_paciente() == $paciente->documento ? 'selected' : '' ?>>
+                                    <? echo $paciente->nombre ?>( <? echo $paciente->documento ?> )
+                                </option>
+                            <?php
+                                    }
+                                }
+                            ?>
+                    </select>
                 </div>
                 
                 <button class="btn btn-outline-success col-12" id="guardar">Actualizar</button>
