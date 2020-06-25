@@ -66,8 +66,7 @@ btnGuardar.addEventListener('click',async ()=>{
             alerta.show('Debes ingresar datos válidos.','danger');
             break;
         case 201:
-            alerta.show('Paciente creado','success');
-            setTimeout(()=>window.location.href = 'index.php?controller=paciente',3000);
+            window.location.href = 'index.php?controller=paciente';
             break;
         default:
             alerta.show('Error al intentar crear, por favor intenta más tarde.');

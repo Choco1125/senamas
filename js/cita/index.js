@@ -45,6 +45,7 @@ function is_hiden() {
 
 function add_to_table(cita) {
     let tr = document.createElement('tr');
+    tr.id = cita.codCita;
     for(let key in cita){
         let td = document.createElement('td');
         td.innerHTML = cita[key];
